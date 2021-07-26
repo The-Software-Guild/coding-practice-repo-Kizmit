@@ -1,0 +1,1 @@
+This repo contains different small programs used for education and testing from the Java bootcamp lecture materials.
