@@ -33,9 +33,8 @@ public class UserIOImpl implements UserIO {
         System.out.println(prompt);
         
         int returnInt;
-        try (Scanner scanner = new Scanner(System.in)) {
-            returnInt = scanner.nextInt();
-        }
+        Scanner scanner = new Scanner(System.in);
+        returnInt = scanner.nextInt();
         
         return returnInt;
     }
@@ -46,16 +45,16 @@ public class UserIOImpl implements UserIO {
         
         int returnInt;
         while(true){
-            try (Scanner scanner = new Scanner(System.in)){
-                returnInt = scanner.nextInt();
-                if(returnInt > min & returnInt < max){
-                    break;
-                }
-                else{
-                    System.out.println("Not in the range. Re-enter a value between the min and max value:");
-                }
+            Scanner scanner = new Scanner(System.in);
+            returnInt = scanner.nextInt();
+            if(returnInt > min & returnInt < max){
+                break;
+            }
+            else{
+                System.out.println("Not in the range. Re-enter a value between the min and max value:");
             }
         }
+        
         
         return returnInt;
     }
@@ -65,9 +64,9 @@ public class UserIOImpl implements UserIO {
         System.out.println(prompt);
         
         double returnDouble;
-        try (Scanner scanner = new Scanner(System.in)){
-            returnDouble = scanner.nextDouble();
-        }
+        Scanner scanner = new Scanner(System.in);
+        returnDouble = scanner.nextDouble();
+        
         
         return returnDouble;
     }
@@ -78,14 +77,13 @@ public class UserIOImpl implements UserIO {
         
         double returnDouble;
         while(true){
-            try (Scanner scanner = new Scanner(System.in)){
-                returnDouble = scanner.nextDouble();
-                if(returnDouble > min & returnDouble < max){
-                    break;
-                }
-                else{
-                    System.out.println("Not in the range. Re-enter a value between the min and max value:");
-                }
+            Scanner scanner = new Scanner(System.in);
+            returnDouble = scanner.nextDouble();
+            if(returnDouble > min & returnDouble < max){
+                break;
+            }
+            else{
+                System.out.println("Not in the range. Re-enter a value between the min and max value:");
             }
         }
         
@@ -97,10 +95,9 @@ public class UserIOImpl implements UserIO {
         System.out.println(prompt);
         
         float returnFloat;
-        try (Scanner scanner = new Scanner(System.in)){
-            returnFloat = scanner.nextFloat();
-        }
-        
+        Scanner scanner = new Scanner(System.in);
+        returnFloat = scanner.nextFloat();
+
         return returnFloat;
     }
 
@@ -110,14 +107,13 @@ public class UserIOImpl implements UserIO {
         
         float returnFloat;
         while(true){
-            try (Scanner scanner = new Scanner(System.in)){
-                returnFloat = scanner.nextFloat();
-                if(returnFloat > min & returnFloat < max){
-                    break;
-                }
-                else{
-                    System.out.println("Not in the range. Re-enter a value between the min and max value:");
-                }
+            Scanner scanner = new Scanner(System.in);
+            returnFloat = scanner.nextFloat();
+            if(returnFloat > min & returnFloat < max){
+                break;
+            }
+            else{
+                System.out.println("Not in the range. Re-enter a value between the min and max value:");
             }
         }
         
@@ -129,9 +125,8 @@ public class UserIOImpl implements UserIO {
         System.out.println(prompt);
         
         long returnLong;
-        try (Scanner scanner = new Scanner(System.in)){
-            returnLong = scanner.nextLong();
-        }
+        Scanner scanner = new Scanner(System.in);
+        returnLong = scanner.nextLong();
         
         return returnLong;
     }
@@ -142,14 +137,13 @@ public class UserIOImpl implements UserIO {
         
         long returnLong;
         while(true){
-            try (Scanner scanner = new Scanner(System.in)){
-                returnLong = scanner.nextLong();
-                if(returnLong > min & returnLong < max){
-                    break;
-                }
-                else{
-                    System.out.println("Not in the range. Re-enter a value between the min and max value:");
-                }
+            Scanner scanner = new Scanner(System.in);
+            returnLong = scanner.nextLong();
+            if(returnLong > min & returnLong < max){
+                break;
+            }
+            else{
+                System.out.println("Not in the range. Re-enter a value between the min and max value:");
             }
         }
         
