@@ -18,6 +18,8 @@ public class UserInterface {
         
         StudentQuizGrades gradeBook = new StudentQuizGrades();
         int numOfQuizzes = random.nextInt(20);
+        
+        //Predefined students for testing
         //Populate gradebook with names and random grades
         for(int i = 0; i < totalStudents; i++){
             List<Integer> grades = new ArrayList<>();
@@ -29,9 +31,9 @@ public class UserInterface {
         
         //Do some stuff
         gradeBook.printStudentNames();
-        gradeBook.getStudentScores("Jane Doe");
-        gradeBook.getStudentScores("John Doe");
-        userIO.print(gradeBook.getStudentScoreAvg("Jane Doe"));
+        //gradeBook.getStudentScores("Jane Doe");
+        //gradeBook.getStudentScores("John Doe");
+        //userIO.print(gradeBook.getStudentScoreAvg("Jane Doe"));
         gradeBook.highestScore();
         gradeBook.lowestScore();
         gradeBook.classAvg();
