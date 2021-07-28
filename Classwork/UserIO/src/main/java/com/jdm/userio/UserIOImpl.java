@@ -35,7 +35,6 @@ public class UserIOImpl implements UserIO {
         int returnInt;
         try (Scanner scanner = new Scanner(System.in)) {
             returnInt = scanner.nextInt();
-            scanner.nextLine();
         }
         
         return returnInt;
