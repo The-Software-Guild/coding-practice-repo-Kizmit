@@ -7,6 +7,7 @@
 package com.jdm.classroster.controller;
 
 import com.jdm.classroster.dao.ClassRosterDao;
+import com.jdm.classroster.dao.ClassRosterDaoException;
 import com.jdm.classroster.dto.Student;
 import com.jdm.classroster.ui.ClassRosterView;
 
@@ -31,31 +32,36 @@ public class ClassRosterController {
     public void run() {
         int menuSelection;
         boolean keepGoing = true;
-        
-        while(keepGoing){
-            menuSelection = getMenuSelection();
-            
-            switch (menuSelection) {
-                case 1:
-                    listStudents();
-                    break;
-                case 2:
-                    createStudent();
-                    break;
-                case 3:
-                    viewStudent();
-                    break;
-                case 4:
-                    removeStudent();
-                    break;
-                case 5:
-                    keepGoing = false;
-                    break;
-                default:
-                    unknownCommand();
+        try{
+            while(keepGoing){
+                menuSelection = getMenuSelection();
+
+                switch (menuSelection) {
+                    case 1:
+                        listStudents();
+                        break;
+                    case 2:
+                        createStudent();
+                        break;
+                    case 3:
+                        viewStudent();
+                        break;
+                    case 4:
+                        removeStudent();
+                        break;
+                    case 5:
+                        keepGoing = false;
+                        break;
+                    default:
+                        unknownCommand();
+                }
             }
+            exitMessage();
         }
-        exitMessage();
+        catch(ClassRosterDaoException e){
+            view.displayErrorMessage(e.getMessage());
+        }
+        
     }
     
     private int getMenuSelection(){
@@ -70,31 +76,32 @@ public class ClassRosterController {
         view.displayExitBanner();
     }
     
-    private void createStudent(){
+    private void createStudent() throws ClassRosterDaoException{
         view.displayCreateStudentBanner();
         Student newStudent = view.getNewStudentInfo();
         dao.addStudent(newStudent.getStudentId(), newStudent);
         view.displayCreateSuccessBanner();
     }
     
-    private void listStudents(){
+    private void listStudents() throws ClassRosterDaoException{
         view.displayDisplayAllBanner();
         List<Student> studentList = dao.getAllStudents();
         view.displayStudentList(studentList);
     }
     
-    private void viewStudent(){
+    private void viewStudent() throws ClassRosterDaoException{
         view.displayDisplayStudentBanner();
         String studentId = view.getStudentIdChoice();
         Student student = dao.getStudent(studentId);
         view.displayStudent(student);
     }
     
-    private void removeStudent(){
+    private void removeStudent() throws ClassRosterDaoException{
         view.displayRemoveStudentBanner();
         String studentId = view.getStudentIdChoice();
         Student removedStudent = dao.removeStudent(studentId);
         view.displayRemoveResult(removedStudent);
     }
+    
 }
 

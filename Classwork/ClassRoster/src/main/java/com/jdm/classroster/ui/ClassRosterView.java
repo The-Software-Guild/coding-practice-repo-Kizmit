@@ -56,6 +56,11 @@ public class ClassRosterView {
         io.print("=== Remove Student ===");
     }
     
+    public void displayErrorMessage(String errorMsg) {
+        io.print("=== ERROR ===");
+        io.print(errorMsg);
+    }
+    
     public void displayCreateSuccessBanner(){
         io.readString("Student successfully created. Please hit enter to continue");
     }
