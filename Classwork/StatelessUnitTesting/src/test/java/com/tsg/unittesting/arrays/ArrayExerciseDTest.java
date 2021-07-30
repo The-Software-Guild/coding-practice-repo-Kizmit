@@ -49,7 +49,7 @@ public class ArrayExerciseDTest {
         assert(result == 12453);
     }
     
-        @Test
+    @Test
     public void testArrayWithLeadingZeros() {
         double[] nums = {.01, .002, .0054, .0505, .0101253};
         
