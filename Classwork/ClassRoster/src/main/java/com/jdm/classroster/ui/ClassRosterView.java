@@ -109,4 +109,8 @@ public class ClassRosterView {
         }
         io.readString("Please hit enter to continue.");
     }
+
+    public void displayRemoveSuccessBanner() {
+        io.print("Student removed.");
+    }
 }
