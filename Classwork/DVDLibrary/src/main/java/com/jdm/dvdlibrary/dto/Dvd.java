@@ -1,5 +1,7 @@
 package com.jdm.dvdlibrary.dto;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 /**
@@ -8,7 +10,8 @@ import java.util.Objects;
  */
 
 public class Dvd {
-    private String title, director, studio, note, mpaaRating, releaseDate;
+    private String title, director, studio, note, mpaaRating; 
+    private LocalDate releaseDate;
     
     public Dvd(String title, String director, String studio, 
             String note, String mpaaRating, String releaseDate){
@@ -17,7 +20,7 @@ public class Dvd {
         this.studio = studio;
         this.note = note;
         this.mpaaRating = mpaaRating;
-        this.releaseDate = releaseDate;
+        this.releaseDate = LocalDate.parse(releaseDate, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
     }
 
     @Override
@@ -100,10 +103,10 @@ public class Dvd {
         this.mpaaRating = mpaaRating;
     }
     
-    public String getReleaseDate(){
+    public LocalDate getReleaseDate(){
         return this.releaseDate;
     }
     public void setReleaseDate(String releaseDate){
-        this.releaseDate = releaseDate;
+        this.releaseDate = LocalDate.parse(releaseDate, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
     }
 }

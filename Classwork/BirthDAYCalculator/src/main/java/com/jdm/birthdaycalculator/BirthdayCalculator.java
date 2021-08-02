@@ -48,7 +48,7 @@ public class BirthdayCalculator {
         return LocalDate.now().getDayOfWeek();
     }
     
-    public long daysUntilBirthday(){ //Doesn't function properly if birthday already occured this year
+    public long daysUntilBirthday(){ //Doesn't function properly if birthday already occured this year (negative days)
         LocalDate thisBirthday = LocalDate.of(LocalDate.now().getYear(), origBirthday.getMonthValue(), origBirthday.getDayOfMonth());
         return ChronoUnit.DAYS.between(LocalDate.now(), thisBirthday);
     }

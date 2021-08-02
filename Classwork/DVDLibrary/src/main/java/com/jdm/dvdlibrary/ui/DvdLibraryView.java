@@ -90,7 +90,7 @@ public class DvdLibraryView {
  
     public Dvd createDvd(){
         Dvd dvd = new Dvd(io.readString("Title:"), io.readString("Director:"), io.readString("Studio:")
-                          , io.readString("Note:"), io.readString("MPAA Rating:"), io.readString("Release Date:"));
+                          , io.readString("Note:"), io.readString("MPAA Rating:"), io.readString("Release Date (mm/dd//yyyy):"));
         return dvd;
     }
 
