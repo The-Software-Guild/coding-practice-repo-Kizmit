@@ -20,7 +20,9 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Joe
  */
 public class ClassRosterDaoFileImplTest {
+    
     ClassRosterDao testDao;
+    
     public ClassRosterDaoFileImplTest() {
     }
     
@@ -52,7 +54,7 @@ public class ClassRosterDaoFileImplTest {
         student.setFirstName("Ada");
         student.setLastName("Lovelace");
         student.setCohort("Java-May-1845");
-
+        
         //  Add the student to the DAO
         testDao.addStudent(studentId, student);
         // Get the student from the DAO
@@ -109,7 +111,7 @@ public class ClassRosterDaoFileImplTest {
         secondStudent.setFirstName("Charles");
         secondStudent.setLastName("Babbage");
         secondStudent.setCohort(".NET-May-1945");
-
+        
         // Add both to the DAO
         testDao.addStudent(firstStudent.getStudentId(), firstStudent);
         testDao.addStudent(secondStudent.getStudentId(), secondStudent);
