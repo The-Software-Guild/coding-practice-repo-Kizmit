@@ -1,5 +1,6 @@
 package com.jdm.interestcalculator;
 
+import java.math.BigDecimal;
 import java.util.Scanner;
 
 /**
@@ -11,33 +12,35 @@ import java.util.Scanner;
 public class InterestCalculator {
     public static void main(String[] args){
         Scanner scanner = new Scanner(System.in);
-        int years; 
-        float interest, investment;
         
         System.out.println("How much do you want to invest? ");
-        investment = Integer.parseInt(scanner.nextLine());
+        BigDecimal investment = new BigDecimal(scanner.nextLine());
         System.out.println("How many years are you investing? ");
-        years = Integer.parseInt(scanner.nextLine());
+        BigDecimal years = new BigDecimal(scanner.nextLine());
         System.out.println("What is the annual interest rate % growth? ");
-        interest = Integer.parseInt(scanner.nextLine());
+        BigDecimal interest = new BigDecimal(scanner.nextLine());
         
         calculate(investment, interest, years);
     }
     
-    static void calculate(float investment, float interest, int years){ //Output does not match sample
+    static void calculate(BigDecimal investment, BigDecimal interest, BigDecimal years){ //Output does not match sample
         System.out.println("Calculating.......");
-        float runningTotal, startAmount;
+        BigDecimal runningTotal, startAmount;
         startAmount = investment;
         runningTotal =  startAmount;
+        BigDecimal quarterlyInterest = interest.divide(new BigDecimal("4"));
+        quarterlyInterest = quarterlyInterest.divide(new BigDecimal("100"));
+        quarterlyInterest = quarterlyInterest.add(new BigDecimal("1"));
         
-        for(int i = 0; i < years; i++)
+        int yearsInt = Integer.parseInt(years.toPlainString());
+        for(int i = 0; i < yearsInt ; i++)
         {
             System.out.println("Year " + (i+1) + ":");
-            System.out.printf("Began with $ %.2f\n", runningTotal);
+            System.out.printf("Began with $%.2f\n", runningTotal);
             for(int j = 0; j < 4; j++){
-                runningTotal *= (1+(interest/4)/100);
+                runningTotal = runningTotal.multiply(quarterlyInterest);
             }
-            System.out.printf("Earned $%.2f\n",  (runningTotal - startAmount));
+            System.out.printf("Earned $%.2f\n",  (runningTotal.subtract(startAmount)));
             System.out.printf("Ended with $%.2f\n",  (runningTotal));
             startAmount = runningTotal;
         }
