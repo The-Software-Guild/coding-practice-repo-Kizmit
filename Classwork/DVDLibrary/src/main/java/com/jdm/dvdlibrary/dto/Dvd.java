@@ -1,5 +1,7 @@
 package com.jdm.dvdlibrary.dto;
 
+import java.util.Objects;
+
 /**
  * @author Joe McAdams
  * @email joedmcadams@gmail.com
@@ -16,6 +18,51 @@ public class Dvd {
         this.note = note;
         this.mpaaRating = mpaaRating;
         this.releaseDate = releaseDate;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 89 * hash + Objects.hashCode(this.title);
+        hash = 89 * hash + Objects.hashCode(this.director);
+        hash = 89 * hash + Objects.hashCode(this.studio);
+        hash = 89 * hash + Objects.hashCode(this.note);
+        hash = 89 * hash + Objects.hashCode(this.mpaaRating);
+        hash = 89 * hash + Objects.hashCode(this.releaseDate);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Dvd other = (Dvd) obj;
+        if (!Objects.equals(this.title, other.title)) {
+            return false;
+        }
+        if (!Objects.equals(this.director, other.director)) {
+            return false;
+        }
+        if (!Objects.equals(this.studio, other.studio)) {
+            return false;
+        }
+        if (!Objects.equals(this.note, other.note)) {
+            return false;
+        }
+        if (!Objects.equals(this.mpaaRating, other.mpaaRating)) {
+            return false;
+        }
+        if (!Objects.equals(this.releaseDate, other.releaseDate)) {
+            return false;
+        }
+        return true;
     }
     
     public String getTitle(){
