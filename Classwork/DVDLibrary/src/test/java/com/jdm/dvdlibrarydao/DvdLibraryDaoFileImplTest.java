@@ -49,7 +49,7 @@ public class DvdLibraryDaoFileImplTest {
     public void testAddGetSearchDvd() {
         //Arrange
         Dvd testDvd = new Dvd("Test Case", "Test Director", "Test Studio", 
-            "Test Note", "Test Rating", "03/29/2021");
+            "Test Note", "Test Rating", "2021-03-29");
         
         //Act
         testDao.addDvd(testDvd);
@@ -65,9 +65,9 @@ public class DvdLibraryDaoFileImplTest {
     public void testAddGetListDvd(){
         //Arrange
         Dvd testDvd1 = new Dvd("Test Case", "Test Director", "Test Studio", 
-            "Test Note", "Test Rating", "03/29/2021");
+            "Test Note", "Test Rating", "2021-03-29");
         Dvd testDvd2 = new Dvd("Test Case 2", "Test Director 2", "Test Studio 2", 
-            "Test Note 2", "Test Rating 2", "05/25/1996");
+            "Test Note 2", "Test Rating 2", "1996-05-25");
         
         //Act
         testDao.addDvd(testDvd1);
@@ -86,9 +86,9 @@ public class DvdLibraryDaoFileImplTest {
     public void testRemoveDvd(){
         //Arrange
         Dvd testDvd1 = new Dvd("Test Case", "Test Director", "Test Studio", 
-            "Test Note", "Test Rating", "03/29/2021");
+            "Test Note", "Test Rating", "2021-03-29");
         Dvd testDvd2 = new Dvd("Test Case 2", "Test Director 2", "Test Studio 2", 
-            "Test Note 2", "Test Rating 2", "05/25/1996");
+            "Test Note 2", "Test Rating 2", "1996-05-25");
         testDao.addDvd(testDvd1);
         testDao.addDvd(testDvd2);
         

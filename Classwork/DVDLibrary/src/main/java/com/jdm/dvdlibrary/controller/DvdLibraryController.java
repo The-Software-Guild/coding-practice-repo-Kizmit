@@ -3,7 +3,8 @@ package com.jdm.dvdlibrary.controller;
 import com.jdm.dvdlibrary.dto.Dvd;
 import com.jdm.dvdlibrary.ui.DvdLibraryView;
 import com.jdm.dvdlibrarydao.DvdLibraryDaoException;
-import com.jdm.dvdlibrarydao.DvdLibraryDao;
+
+import com.jdm.dvdlibrarydao.DvdLibraryDaoLambda;
 
 import java.util.List;
 
@@ -13,10 +14,10 @@ import java.util.List;
  */
 
 public class DvdLibraryController {
-    private final DvdLibraryDao dao;
+    private final DvdLibraryDaoLambda dao;
     private final DvdLibraryView view;
     
-    public DvdLibraryController(DvdLibraryDao dao, DvdLibraryView view){
+    public DvdLibraryController(DvdLibraryDaoLambda dao, DvdLibraryView view){
         this.dao = dao;
         this.view = view;
     }
@@ -45,12 +46,15 @@ public class DvdLibraryController {
                         viewDvdLibrary();
                         break;
                     case 5:
-                        getDvdInfo();
+                        viewDvdLibraryWithFilter();
                         break;
                     case 6:
-                        searchForDvd();
+                        getDvdInfo();
                         break;
                     case 7:
+                        searchForDvd();
+                        break;
+                    case 8:
                         exit = true;
                         break; 
                 }
@@ -129,5 +133,27 @@ public class DvdLibraryController {
         else{
             view.printSearchFailure();
         }
+    }
+
+    private void viewDvdLibraryWithFilter() {
+        int choice = view.printGetFilterMenuChoice();
+        List<Dvd> filteredDvdList = null;
+        switch(choice){
+            case 1:
+                filteredDvdList = dao.getDvdsInReleaseWindow(view.getReleaseWindowFromUser());
+                break;
+            case 2:
+                //Movies with given MPAA rating
+                filteredDvdList = dao.getDvdsWithRating(view.getRatingFromUser());
+                break;
+            case 3:
+                //Movies by given director
+                break;
+            case 4:
+                //Movies released by particular studio
+                break;
+        }
+        view.printViewLibraryBanner();
+        view.printLibraryList(filteredDvdList);
     }
 }

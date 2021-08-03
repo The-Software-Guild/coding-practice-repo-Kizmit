@@ -21,11 +21,12 @@ public class DvdLibraryView {
         io.print("2. Remove a DVD");
         io.print("3. Edit a DVD");
         io.print("4. List DVD collection");
-        io.print("5. Get information about a DVD");
-        io.print("6. Search for a DVD");
-        io.print("7. Exit");
+        io.print("5. List DVD collection with filter");
+        io.print("6. Get information about a DVD");
+        io.print("7. Search for a DVD");
+        io.print("8. Exit");
         
-        return io.readInt("Please make your menu selection from the above choices: ", 1, 7);
+        return io.readInt("Please make your menu selection from the above choices: ", 1, 8);
     }
     
     public void printMenuBanner(){
@@ -90,7 +91,7 @@ public class DvdLibraryView {
  
     public Dvd createDvd(){
         Dvd dvd = new Dvd(io.readString("Title:"), io.readString("Director:"), io.readString("Studio:")
-                          , io.readString("Note:"), io.readString("MPAA Rating:"), io.readString("Release Date (mm/dd//yyyy):"));
+                          , io.readString("Note:"), io.readString("MPAA Rating:"), io.readString("Release Date (yyyy-mm-dd):"));
         return dvd;
     }
 
@@ -130,5 +131,23 @@ public class DvdLibraryView {
 
     public void displayErrorMessage(String message) {
         System.out.println(message);
+    }
+
+    public int printGetFilterMenuChoice() {
+        io.print("Which filter would you like to apply: ");
+        io.print("1. DVDs released in the last N years");
+        io.print("2. DVDs with specified MPAA rating");
+        io.print("3. DVDs with specified director (sorted by MPAA rating)");
+        io.print("4. DVDs released by a specified studio");
+        int field = io.readInt("Enter the value of the menu choices above: ", 1, 4);
+        return field;
+    }
+
+    public int getReleaseWindowFromUser() {
+        return io.readInt("Enter number of years to go back (min 1, max 100):", 1, 100);
+    }
+
+    public String getRatingFromUser() {
+        return io.readString("Enter the MPAA rating you're interested in: ");
     }
 }

@@ -20,7 +20,7 @@ public class Dvd {
         this.studio = studio;
         this.note = note;
         this.mpaaRating = mpaaRating;
-        this.releaseDate = LocalDate.parse(releaseDate, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+        this.releaseDate = LocalDate.parse(releaseDate);
     }
 
     @Override
@@ -107,6 +107,6 @@ public class Dvd {
         return this.releaseDate;
     }
     public void setReleaseDate(String releaseDate){
-        this.releaseDate = LocalDate.parse(releaseDate, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+        this.releaseDate = LocalDate.parse(releaseDate);
     }
 }
