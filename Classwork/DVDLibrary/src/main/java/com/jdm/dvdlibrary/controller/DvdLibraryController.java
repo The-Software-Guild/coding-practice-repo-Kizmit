@@ -174,24 +174,28 @@ public class DvdLibraryController {
        
     }
 
-    private void getNewestOldestDvd() {
+    private void getNewestOldestDvd() throws DvdLibraryDaoException {
         Dvd dvd = null;
-        switch(view.printGetOldestNewestDvd()){
-            case 1:
-                dvd = dao.getNewestDvd();
-                break;
-            case 2:
-                dvd = dao.getOldestDvd();
-                break;
+        try{
+            switch(view.printGetOldestNewestDvd()){
+                case 1:
+                    dvd = dao.getNewestDvd();
+                    break;
+                case 2:
+                    dvd = dao.getOldestDvd();
+                    break;
+            }
+            if(dvd != null){
+                view.printGetDvdInfoBanner();
+                view.printDvdInfo(dvd);
+            }
+            else{
+                view.printDvdInfoFailure();
+            }
         }
-        if(dvd != null){
-            view.printGetDvdInfoBanner();
-            view.printDvdInfo(dvd);
+        catch(DvdLibraryDaoException e){
+            throw new DvdLibraryDaoException("No elements in list when looking for newest/oldest DVD");
         }
-        else{
-            view.printDvdInfoFailure();
-        }
-        
     }
 
     private void getAverages() {

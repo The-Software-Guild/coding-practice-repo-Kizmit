@@ -54,14 +54,16 @@ public interface DvdLibraryDaoLambda extends DvdLibraryDao{
     /**
      * Return the DVD with the most recent release date
      * @return BigDecimal avg
+     * @throws com.jdm.dvdlibrarydao.DvdLibraryDaoException
      */
-    public Dvd getNewestDvd();
+    public Dvd getNewestDvd() throws DvdLibraryDaoException;
     
     /**
      * Return the DVD with the oldest release date
      * @return Dvd obj
+     * @throws com.jdm.dvdlibrarydao.DvdLibraryDaoException
      */
-    public Dvd getOldestDvd();
+    public Dvd getOldestDvd() throws DvdLibraryDaoException;
     
     /**
      * Return the average number of notes (?) associated with DVDs in the collection

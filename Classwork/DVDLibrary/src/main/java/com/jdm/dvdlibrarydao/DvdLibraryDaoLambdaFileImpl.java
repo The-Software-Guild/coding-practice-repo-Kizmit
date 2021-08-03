@@ -16,10 +16,11 @@ import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -176,16 +177,15 @@ public class DvdLibraryDaoLambdaFileImpl implements DvdLibraryDaoLambda {
     }
 
     @Override
-    public Dvd getNewestDvd() { //This is a dirty workaround.
-        LocalDate maxDate = getDvdList().stream().map((dvd) -> dvd.getReleaseDate()).max(Date::compareTo).get();
-        List<Dvd> newestDvd = getDvdList().stream().filter((dvd) -> dvd.getReleaseDate() == maxDate)
-                .collect(Collectors.toList());
-        return newestDvd.get(0);
+    public Dvd getNewestDvd() throws DvdLibraryDaoException{
+        return getDvdList().stream().max(Comparator.comparing(dvd -> dvd.getReleaseDate()))
+                .orElseThrow(() -> new DvdLibraryDaoException("No max date could be found."));
     }
 
     @Override
-    public Dvd getOldestDvd() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Dvd getOldestDvd() throws DvdLibraryDaoException{
+        return getDvdList().stream().min(Comparator.comparing(dvd -> dvd.getReleaseDate()))
+                .orElseThrow(() -> new DvdLibraryDaoException("No min date could be found."));
     }
 
     @Override
