@@ -176,27 +176,25 @@ public class DvdLibraryController {
 
     private void getNewestOldestDvd() throws DvdLibraryDaoException {
         Dvd dvd = null;
-        try{
-            switch(view.printGetOldestNewestDvd()){
-                case 1:
-                    dvd = dao.getNewestDvd();
-                    break;
-                case 2:
-                    dvd = dao.getOldestDvd();
-                    break;
-            }
-            if(dvd != null){
-                view.printGetDvdInfoBanner();
-                view.printDvdInfo(dvd);
-            }
-            else{
-                view.printDvdInfoFailure();
-            }
+        
+        switch(view.printGetOldestNewestDvd()){
+            case 1:
+                dvd = dao.getNewestDvd();
+                break;
+            case 2:
+                dvd = dao.getOldestDvd();
+                break;
         }
-        catch(DvdLibraryDaoException e){
-            throw new DvdLibraryDaoException("No elements in list when looking for newest/oldest DVD");
+        if(dvd != null){
+            view.printGetDvdInfoBanner();
+            view.printDvdInfo(dvd);
+        }
+        else{
+            view.printDvdInfoFailure();
         }
     }
+        
+    
 
     private void getAverages() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

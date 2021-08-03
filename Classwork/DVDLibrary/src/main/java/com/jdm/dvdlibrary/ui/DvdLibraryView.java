@@ -161,7 +161,7 @@ public class DvdLibraryView {
     }
 
     public int printGetOldestNewestDvd() {
-        io.print("Oldest or newest?: ");
+        io.print("Oldest or newest: ");
         io.print("1. Newest");
         io.print("2. Oldest");
         return io.readInt("Enter the value of the menu choices above: ", 1, 2);
