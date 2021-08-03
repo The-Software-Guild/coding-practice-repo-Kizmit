@@ -8,6 +8,7 @@ package com.jdm.dvdlibrarydao;
 import com.jdm.dvdlibrary.dto.Dvd;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -35,7 +36,7 @@ public interface DvdLibraryDaoLambda extends DvdLibraryDao{
      * @param director
      * @return List<Dvd>
      */
-    public List<Dvd> getDvdsWithDirector(String director);
+    public Map<String, List<Dvd>> getDvdsWithDirector(String director);
     
     /**
      * Return a list of Dvds created by the specified studio

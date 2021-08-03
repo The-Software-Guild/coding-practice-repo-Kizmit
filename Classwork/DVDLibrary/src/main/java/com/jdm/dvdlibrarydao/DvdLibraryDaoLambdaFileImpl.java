@@ -16,6 +16,7 @@ import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -153,17 +154,20 @@ public class DvdLibraryDaoLambdaFileImpl implements DvdLibraryDaoLambda {
 
     @Override
     public List<Dvd> getDvdsWithRating(String rating) {
-       return getDvdList().stream().filter((dvd) -> dvd.getMpaaRating().equals(rating)).collect(Collectors.toList());
+       return getDvdList().stream().filter((dvd) -> dvd.getMpaaRating().toLowerCase().equals(rating.toLowerCase()))
+               .collect(Collectors.toList());
     }
 
     @Override
-    public List<Dvd> getDvdsWithDirector(String director) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Map<String, List<Dvd>> getDvdsWithDirector(String director) {
+        return getDvdList().stream().filter((dvd) -> dvd.getDirector().toLowerCase().equals(director.toLowerCase()))
+                .collect(Collectors.groupingBy((dvd) -> dvd.getMpaaRating()));
     }
 
     @Override
     public List<Dvd> getDvdsWithStudio(String studio) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return getDvdList().stream().filter((dvd) -> dvd.getStudio().toLowerCase().equals(studio.toLowerCase()))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -172,8 +176,11 @@ public class DvdLibraryDaoLambdaFileImpl implements DvdLibraryDaoLambda {
     }
 
     @Override
-    public Dvd getNewestDvd() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Dvd getNewestDvd() { //This is a dirty workaround.
+        LocalDate maxDate = getDvdList().stream().map((dvd) -> dvd.getReleaseDate()).max(Date::compareTo).get();
+        List<Dvd> newestDvd = getDvdList().stream().filter((dvd) -> dvd.getReleaseDate() == maxDate)
+                .collect(Collectors.toList());
+        return newestDvd.get(0);
     }
 
     @Override

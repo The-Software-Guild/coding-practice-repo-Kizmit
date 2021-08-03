@@ -1,2 +1,5 @@
 Test 2::Not in range::Asd::asd::E::2012-03-29
+Test 3::In range::asd::asd::R::2012-03-12
+Test 4::In range::asd::asd::Other::2005-02-24
+Test 5::In range::asd::asd::Other::2006-06-23
 Test 1::In range::Yes::Yes::R::2017-03-29

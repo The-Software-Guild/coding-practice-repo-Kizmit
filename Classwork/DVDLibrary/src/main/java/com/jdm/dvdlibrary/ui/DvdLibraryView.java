@@ -24,9 +24,11 @@ public class DvdLibraryView {
         io.print("5. List DVD collection with filter");
         io.print("6. Get information about a DVD");
         io.print("7. Search for a DVD");
-        io.print("8. Exit");
+        io.print("8. Get the newest or oldest movie in collection");
+        io.print("9. Get average age of movies/number of notes");
+        io.print("0. Exit");
         
-        return io.readInt("Please make your menu selection from the above choices: ", 1, 8);
+        return io.readInt("Please make your menu selection from the above choices: ", 0, 9);
     }
     
     public void printMenuBanner(){
@@ -40,8 +42,10 @@ public class DvdLibraryView {
         io.print("The DVD was successfully added to the collection.");
     }
     
-    public void printViewLibraryBanner() {
+    public void printViewLibraryBannerHeader() {
         io.print("================================================================================DVD LIBRARY=================================================================================");
+        String tableHeader = String.format("%-35s%-25s%-25s%-50s%-25s%-25s\n", "Title", "Director", "Studio", "Note", "MPAA Rating", "Release Date");
+        io.print(tableHeader);
     }
     
     public void printRemoveDvdBanner() {
@@ -86,7 +90,7 @@ public class DvdLibraryView {
         io.print("Release Date: " + dvd.getReleaseDate());
     }
     public void printDvdInfoFailure() {
-        io.print("Failed to get information on DVD; it doesn't exist in the collection.");
+        io.print("Failed to get information on DVD(s); it/they don't exist in the collection.");
     }
  
     public Dvd createDvd(){
@@ -96,10 +100,8 @@ public class DvdLibraryView {
     }
 
     public void printLibraryList(List<Dvd> dvdList) {
-        String tableHeader = String.format("%-35s%-25s%-25s%-50s%-25s%-25s\n", "Title", "Director", "Studio", "Note", "MPAA Rating", "Release Date");
         String fDvdStr;
         
-        io.print(tableHeader);
         for(Dvd dvd : dvdList){
             fDvdStr = String.format("%-35s%-25s%-25s%-50s%-25s%-25s\n", dvd.getTitle(), dvd.getDirector(), dvd.getStudio()
                               , dvd.getNote(), dvd.getMpaaRating(), dvd.getReleaseDate());
@@ -139,8 +141,7 @@ public class DvdLibraryView {
         io.print("2. DVDs with specified MPAA rating");
         io.print("3. DVDs with specified director (sorted by MPAA rating)");
         io.print("4. DVDs released by a specified studio");
-        int field = io.readInt("Enter the value of the menu choices above: ", 1, 4);
-        return field;
+        return io.readInt("Enter the value of the menu choices above: ", 1, 4);
     }
 
     public int getReleaseWindowFromUser() {
@@ -149,5 +150,20 @@ public class DvdLibraryView {
 
     public String getRatingFromUser() {
         return io.readString("Enter the MPAA rating you're interested in: ");
+    }
+
+    public String getDirectorFromUser() {
+        return io.readString("Enter the director you're interested in: ");
+    }
+
+    public String getStudioFromUser() {
+        return io.readString("Enter the studio you're interested in: ");
+    }
+
+    public int printGetOldestNewestDvd() {
+        io.print("Oldest or newest?: ");
+        io.print("1. Newest");
+        io.print("2. Oldest");
+        return io.readInt("Enter the value of the menu choices above: ", 1, 2);
     }
 }

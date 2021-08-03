@@ -7,6 +7,7 @@ import com.jdm.dvdlibrarydao.DvdLibraryDaoException;
 import com.jdm.dvdlibrarydao.DvdLibraryDaoLambda;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Joe McAdams
@@ -24,15 +25,12 @@ public class DvdLibraryController {
     
     public void run(){
         boolean exit = false;
-        int menuSelection;
         
         try{
             dao.loadDvdLibrary();
             
             while(!exit){
-                menuSelection = getMenuSelection();
-
-                switch(menuSelection){
+                switch(getMenuSelection()){
                     case 1: 
                         addDvd();
                         break;
@@ -55,6 +53,12 @@ public class DvdLibraryController {
                         searchForDvd();
                         break;
                     case 8:
+                        getNewestOldestDvd();
+                        break;
+                    case 9:
+                        getAverages();
+                        break;
+                    case 0:
                         exit = true;
                         break; 
                 }
@@ -106,7 +110,7 @@ public class DvdLibraryController {
     }
 
     private void viewDvdLibrary() {
-        view.printViewLibraryBanner();
+        view.printViewLibraryBannerHeader();
         List<Dvd> dvdList = dao.getDvdList();
         view.printLibraryList(dvdList);
     }
@@ -136,10 +140,11 @@ public class DvdLibraryController {
     }
 
     private void viewDvdLibraryWithFilter() {
-        int choice = view.printGetFilterMenuChoice();
         List<Dvd> filteredDvdList = null;
-        switch(choice){
+        Map<String, List<Dvd>> directorRatingDvdMap = null;
+        switch(view.printGetFilterMenuChoice()){
             case 1:
+                //Movies released in the last N years
                 filteredDvdList = dao.getDvdsInReleaseWindow(view.getReleaseWindowFromUser());
                 break;
             case 2:
@@ -147,13 +152,49 @@ public class DvdLibraryController {
                 filteredDvdList = dao.getDvdsWithRating(view.getRatingFromUser());
                 break;
             case 3:
-                //Movies by given director
+                //Movies by given director separated into lists by rating
+                directorRatingDvdMap = dao.getDvdsWithDirector(view.getDirectorFromUser());
                 break;
             case 4:
                 //Movies released by particular studio
+                filteredDvdList = dao.getDvdsWithStudio(view.getStudioFromUser());
                 break;
         }
-        view.printViewLibraryBanner();
-        view.printLibraryList(filteredDvdList);
+        if(directorRatingDvdMap != null){
+            view.printViewLibraryBannerHeader();
+            directorRatingDvdMap.forEach((rating, dvdList) -> view.printLibraryList(dvdList));
+        }
+        else if(filteredDvdList != null){
+            view.printViewLibraryBannerHeader();
+            view.printLibraryList(filteredDvdList);
+        }
+        else{
+            view.printSearchFailure();
+        }
+       
+    }
+
+    private void getNewestOldestDvd() {
+        Dvd dvd = null;
+        switch(view.printGetOldestNewestDvd()){
+            case 1:
+                dvd = dao.getNewestDvd();
+                break;
+            case 2:
+                dvd = dao.getOldestDvd();
+                break;
+        }
+        if(dvd != null){
+            view.printGetDvdInfoBanner();
+            view.printDvdInfo(dvd);
+        }
+        else{
+            view.printDvdInfoFailure();
+        }
+        
+    }
+
+    private void getAverages() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
