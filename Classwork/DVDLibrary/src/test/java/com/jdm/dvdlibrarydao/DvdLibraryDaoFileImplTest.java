@@ -14,6 +14,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  *
@@ -38,7 +40,8 @@ public class DvdLibraryDaoFileImplTest {
         String testFile = "testDvdLibrary.txt";
         
         new FileWriter(testFile);
-        testDao = new DvdLibraryDaoFileImpl(testFile);
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+        testDao = ctx.getBean("testDao", DvdLibraryDaoLambdaFileImpl.class);
     }
     
     @AfterEach

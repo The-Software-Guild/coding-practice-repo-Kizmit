@@ -1,13 +1,8 @@
 package com.jdm.dvdlibrary;
 
 import com.jdm.dvdlibrary.controller.DvdLibraryController;
-import com.jdm.dvdlibrary.ui.DvdLibraryView;
-import com.jdm.dvdlibrary.ui.UserIO;
-import com.jdm.dvdlibrary.ui.UserIOConsoleImpl;
-import com.jdm.dvdlibrarydao.DvdLibraryDaoFileImpl;
-import com.jdm.dvdlibrarydao.DvdLibraryDao;
-import com.jdm.dvdlibrarydao.DvdLibraryDaoLambda;
-import com.jdm.dvdlibrarydao.DvdLibraryDaoLambdaFileImpl;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * @author  Joe McAdams
@@ -17,11 +12,15 @@ import com.jdm.dvdlibrarydao.DvdLibraryDaoLambdaFileImpl;
 
 public class App {
     public static void main(String[] args){
-        UserIO io = new UserIOConsoleImpl();                                    //Input/output object
+       /* UserIO io = new UserIOConsoleImpl();                                    //Input/output object
         DvdLibraryView view = new DvdLibraryView(io);                           //View injected with input/output object
         //DvdLibraryDao dao = new DvdLibraryDaoFileImpl();
         DvdLibraryDaoLambda dao = new DvdLibraryDaoLambdaFileImpl();                        //Data access object
         DvdLibraryController controller = new DvdLibraryController(dao, view);  //Controller object injected with dao and view
-        controller.run();                                                       //Run main program logic
+        controller.run();    */                                                  //Run main program logic
+        
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+        DvdLibraryController controller = ctx.getBean("controller", DvdLibraryController.class);
+        controller.run();
     }
 }
