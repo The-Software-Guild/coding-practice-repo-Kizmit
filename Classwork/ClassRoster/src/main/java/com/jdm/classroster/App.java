@@ -7,15 +7,8 @@
 package com.jdm.classroster;
 
 import com.jdm.classroster.controller.ClassRosterController;
-import com.jdm.classroster.dao.ClassRosterAuditDao;
-import com.jdm.classroster.dao.ClassRosterAuditDaoFileImpl;
-import com.jdm.classroster.dao.ClassRosterDao;
-import com.jdm.classroster.dao.ClassRosterDaoFileImpl;
-import com.jdm.classroster.service.ClassRosterServiceLayer;
-import com.jdm.classroster.service.ClassRosterServiceLayerImpl;
-import com.jdm.classroster.ui.ClassRosterView;
-import com.jdm.classroster.ui.UserIO;
-import com.jdm.classroster.ui.UserIOConsoleImpl;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  *
@@ -25,7 +18,7 @@ import com.jdm.classroster.ui.UserIOConsoleImpl;
  */
 public class App {
     public static void main(String[] args) {
-        // Instantiate the UserIO implementation
+        /*// Instantiate the UserIO implementation
         UserIO myIo = new UserIOConsoleImpl();
         // Instantiate the View and wire the UserIO implementation into it
         ClassRosterView myView = new ClassRosterView(myIo);
@@ -38,6 +31,10 @@ public class App {
         // Instantiate the Controller and wire the Service Layer into it
         ClassRosterController controller = new ClassRosterController(myService, myView);
         // Kick off the Controller
+        controller.run();
+        */
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+        ClassRosterController controller = ctx.getBean("controller", ClassRosterController.class);
         controller.run();
     }   
 }
