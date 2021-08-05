@@ -10,6 +10,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  *
@@ -33,9 +35,10 @@ public class VendingMachineDaoFileImplTest {
     
     @BeforeEach
     public void setUp() throws Exception {
-        String testFile = "testInventory.txt";
-        
-        testDao =  new VendingMachineDaoFileImpl(testFile);
+        /*String testFile = "testInventory.txt";
+        testDao =  new VendingMachineDaoFileImpl(testFile);*/
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+        testDao = ctx.getBean("testDao", VendingMachineDaoFileImpl.class);
         testDao.loadInventory();
         
     }

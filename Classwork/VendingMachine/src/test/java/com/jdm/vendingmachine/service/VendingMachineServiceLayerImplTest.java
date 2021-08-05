@@ -3,8 +3,6 @@ package com.jdm.vendingmachine.service;
 import com.jdm.vendingmachine.dao.InsufficientFundsException;
 import com.jdm.vendingmachine.dao.ItemPersistenceException;
 import com.jdm.vendingmachine.dao.NoItemInventoryException;
-import com.jdm.vendingmachine.dao.VendingMachineAuditDao;
-import com.jdm.vendingmachine.dao.VendingMachineDao;
 import com.jdm.vendingmachine.dto.Change;
 import java.math.BigDecimal;
 import org.junit.jupiter.api.AfterEach;
@@ -13,6 +11,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  *
@@ -22,10 +22,11 @@ public class VendingMachineServiceLayerImplTest {
     VendingMachineServiceLayer service;
     
     public VendingMachineServiceLayerImplTest() {
-        VendingMachineDao dao = new VendingMachineDaoStubImpl();
+        /*VendingMachineDao dao = new VendingMachineDaoStubImpl();
         VendingMachineAuditDao auditDao = new VendingMachineAuditDaoStubImpl();
-        
-        service = new VendingMachineServiceLayerImpl(dao, auditDao);
+        service = new VendingMachineServiceLayerImpl(dao, auditDao);*/
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+        service = ctx.getBean("service", VendingMachineServiceLayerImpl.class);
     }
     
     @BeforeAll
