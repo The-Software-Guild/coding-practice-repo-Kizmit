@@ -71,7 +71,7 @@ public class EmployeeDaoDb implements EmployeeDao {
         final String DELETE_MEETING_EMPLOYEE = "DELETE FROM meeting_employee WHERE employeeId = ?";
         jdbc.update(DELETE_MEETING_EMPLOYEE, id);
         
-        final String DELETE_EMPLOYEE = "DELETE FROM employee WHERE employeeId = ?";
+        final String DELETE_EMPLOYEE = "DELETE FROM employee WHERE Id = ?";
         jdbc.update(DELETE_EMPLOYEE, id);    
     }
     
