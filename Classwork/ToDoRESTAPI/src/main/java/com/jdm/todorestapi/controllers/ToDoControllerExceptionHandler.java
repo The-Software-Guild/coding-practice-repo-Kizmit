@@ -25,8 +25,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @RestController
 public class ToDoControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
-    private static final String CONSTRAINT_MESSAGE = "Could not save your item. "
-            + "Please ensure it is valid and try again.";
+    private static final String CONSTRAINT_MESSAGE = "Something went wrong.";
 
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
     public final ResponseEntity<Error> handleSqlException(

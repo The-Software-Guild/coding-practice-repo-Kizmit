@@ -46,10 +46,7 @@ public class ToDoDatabaseDao implements ToDoDao {
 
         jdbcTemplate.update((Connection conn) -> {
 
-            PreparedStatement statement = conn.prepareStatement(
-                sql, 
-                Statement.RETURN_GENERATED_KEYS);
-
+            PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, todo.getTodo());
             statement.setString(2, todo.getNote());
             return statement;
